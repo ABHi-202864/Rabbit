@@ -1,14 +1,14 @@
 import TopBar from "../Layout/TopBar";
+import Navbar from "./Navbar";
 
 
 const Header = () => {
   return (
-    <div>
-      {/* TOP-BAR */}
+    <header className="border-b border-gray-200">
       <TopBar />
-      {/* NAV-BAR */}
+      <Navbar />
       {/* CART-DRAWER */}
-    </div>
+    </header>
   )
 }
 
