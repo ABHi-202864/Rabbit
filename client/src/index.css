@@ -1,7 +1,15 @@
+/* IMPORT GOOGLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import "tailwindcss";
 
 #root {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+@theme {
+  --font-inter: Inter, "sans-serif";
+  --color-rabitRad: #ea2e0e;
 }
