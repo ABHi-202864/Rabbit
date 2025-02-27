@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HiMagnifyingGlass, HiMiniXMark } from "react-icons/hi2";
-import { Form } from "react-router-dom";
+// import { Form } from "react-router-dom";
 
 
 const SearchBar = () => {
@@ -13,7 +13,6 @@ const SearchBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("Search Term:", searchTerm);
     setIsOpen(false);
   }
 

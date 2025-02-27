@@ -18,12 +18,12 @@ const TopBar = () => {
           </a>
         </div>
 
-        <div className="text-sm text-center flex-grow font-inter">
+        <div className="text-sm text-center flex-grow">
           <span>We ship worldwide - Fast and reliable shipping!</span>
         </div>
 
         <div className="hidden md:block text-sm">
-          <a href="tel:+1234567890" className="hover:text-gray-300 transition-colors font-inter">+1 (234) 567-890</a>
+          <a href="tel:+1234567890" className="hover:text-gray-300 transition-colors">+1 (234) 567-890</a>
         </div>
       </div>
 
