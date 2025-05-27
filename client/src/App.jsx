@@ -5,8 +5,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* USER LAYOUT */}
         <Route path="/" element={<UserLayout />}>
-          {/* USER LAYOUT */}
         </Route>
         <Route>
           {/* ADMIN LAYOUT */}
