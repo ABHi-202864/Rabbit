@@ -1,3 +1,4 @@
+import Footer from "../Common/Footer";
 import Header from "../Common/Header";
 
 
@@ -8,6 +9,7 @@ const UserLayout = () => {
       <Header />
       {/* MAIN CONTENT */}
       {/* FOOTER */}
+      <Footer />
     </>
   )
 }
