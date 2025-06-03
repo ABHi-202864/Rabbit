@@ -6,6 +6,7 @@ function NewArrivals() {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStaryX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState();
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   const scrollRef = useRef(null);
@@ -101,9 +102,23 @@ function NewArrivals() {
     },
   ]
 
+  const scroll = (diraction) => {
+    const scrollAmount = diraction === "left" ? -600 : 600;
+    scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  }
+
   // Update Scroll Button
   const updateScrollButton = () => {
     const container = scrollRef.current;
+
+    if (container) {
+      const leftScroll = container.scrollLeft;
+      const rightScrollable = container.scrollWidth > leftScroll + container.clientWidth;
+
+      setCanScrollLeft(leftScroll > 0);
+      setCanScrollRight(rightScrollable);
+    }
+
     console.log({
       scrollLeft: container.scrollLeft,
       clientWidth: container.clientWidth,
@@ -131,19 +146,33 @@ function NewArrivals() {
           </p>
 
           {/* Scroll Buttons */}
-          <div className="absolute right-0 bottom-[-30px] flex space-x-2">
-            <button className="p-2 rounded border bg-white text-black cursor-pointer">
+          <div className="absolute right-0 bottom-[-30px] flex space-x-2 mr-8">
+            <button
+              onClick={() => scroll("left")}
+              disabled={!canScrollLeft}
+              className={`p-2 rounded border cursor-pointer ${canScrollLeft ? "bg-white text-black" : "bg-gray-200 text-gray-400"}`}
+            >
               <FiChevronLeft className="text-2xl" />
             </button>
 
-            <button className="p-2 rounded border bg-white text-black cursor-pointer">
+            <button
+              onClick={() => scroll("right")}
+              className={`p-2 rounded border cursor-pointer ${canScrollRight ? "bg-white text-black" : "bg-gray-200 text-gray-400"}`}
+            >
               <FiChevronRight className="text-2xl" />
             </button>
           </div>
         </div>
 
         {/* Scrollable Content */}
-        <div ref={scrollRef} className="container mx-auto overflow-x-scroll flex space-x-6 relative">
+        <div
+          ref={scrollRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUpOrLeave}
+          onMouseLeave={handleMouseUpOrLeave}
+          className="container mx-auto overflow-x-scroll flex space-x-6 relative"
+        >
           {
             newArrivals.map((product) => (
               <div key={product._id} className="min-w-full sm:min-w-1/2 lg:min-w-[30%] relative">
@@ -164,7 +193,7 @@ function NewArrivals() {
             ))
           }
         </div>
-      </section>
+      </section >
     </>
   )
 }
