@@ -102,6 +102,24 @@ function NewArrivals() {
     },
   ]
 
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStaryX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  }
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = x - startX;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  }
+
+  const handleMouseUpOrLeave = () => {
+    setIsDragging(false);
+  }
+
   const scroll = (diraction) => {
     const scrollAmount = diraction === "left" ? -600 : 600;
     scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
@@ -123,6 +141,7 @@ function NewArrivals() {
       scrollLeft: container.scrollLeft,
       clientWidth: container.clientWidth,
       containerScrollWidth: container.containerScrollWidth,
+      offsetLeft: scrollRef.current.offsetLeft,
     });
   }
 
@@ -132,11 +151,11 @@ function NewArrivals() {
       container.addEventListener("scroll", updateScrollButton);
       updateScrollButton();
     }
-  });
+  }, []);
 
   return (
     <>
-      <section>
+      <section className="py-16 px-2">
         <div className="container mx-auto text-center mb-10 relative">
           <h2 className="text-3xl font-bold mb-4">
             Explore New Arrivals
@@ -171,18 +190,19 @@ function NewArrivals() {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUpOrLeave}
           onMouseLeave={handleMouseUpOrLeave}
-          className="container mx-auto overflow-x-scroll flex space-x-6 relative"
+          className={`container mx-auto overflow-x-scroll flex space-x-6 relative ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
         >
           {
             newArrivals.map((product) => (
               <div key={product._id} className="min-w-full sm:min-w-1/2 lg:min-w-[30%] relative">
                 <img
+                  draggable="false"
                   src={product.images[0]?.url}
                   alt={product.images[0]?.altText || product.name}
                   className="w-full h-[500px] object-cover rounded-lg"
                 />
                 <div
-                  className="absolute bottom-0 left-0 right-0 opacity-50 backdrop-blur-md text-white p-4 rounded-b-lg"
+                  className="absolute bottom-0 left-0 right-0 opacity-50 backdrop-blur-md text-white p-2 rounded-b-lg"
                 >
                   <Link to={`/product/${product._id}`} className="block">
                     <h4 className="font-medium">{product.name}</h4>
