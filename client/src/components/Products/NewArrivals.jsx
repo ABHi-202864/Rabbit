@@ -136,86 +136,79 @@ function NewArrivals() {
       setCanScrollLeft(leftScroll > 0);
       setCanScrollRight(rightScrollable);
     }
-
-    console.log({
-      scrollLeft: container.scrollLeft,
-      clientWidth: container.clientWidth,
-      containerScrollWidth: container.containerScrollWidth,
-      offsetLeft: scrollRef.current.offsetLeft,
-    });
   }
 
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (container) {
-      container.addEventListener("scroll", updateScrollButton);
-      updateScrollButton();
-    }
-  }, []);
+    useEffect(() => {
+      const container = scrollRef.current;
+      if (container) {
+        container.addEventListener("scroll", updateScrollButton);
+        updateScrollButton();
+      }
+    }, []);
 
-  return (
-    <>
-      <section className="py-16 px-2">
-        <div className="container mx-auto text-center mb-10 relative">
-          <h2 className="text-3xl font-bold mb-4">
-            Explore New Arrivals
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Discover the latest styles straight of the runway, freshly added to keep your wardrobe on the cutting edge of fashion.
-          </p>
+    return (
+      <>
+        <section className="py-16 px-2">
+          <div className="container mx-auto text-center mb-10 relative">
+            <h2 className="text-3xl font-bold mb-4">
+              Explore New Arrivals
+            </h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Discover the latest styles straight of the runway, freshly added to keep your wardrobe on the cutting edge of fashion.
+            </p>
 
-          {/* Scroll Buttons */}
-          <div className="absolute right-0 bottom-[-30px] flex space-x-2 mr-8">
-            <button
-              onClick={() => scroll("left")}
-              disabled={!canScrollLeft}
-              className={`p-2 rounded border cursor-pointer ${canScrollLeft ? "bg-white text-black" : "bg-gray-200 text-gray-400"}`}
-            >
-              <FiChevronLeft className="text-2xl" />
-            </button>
+            {/* Scroll Buttons */}
+            <div className="absolute right-0 bottom-[-30px] flex space-x-2 mr-8">
+              <button
+                onClick={() => scroll("left")}
+                disabled={!canScrollLeft}
+                className={`p-2 rounded border cursor-pointer ${canScrollLeft ? "bg-white text-black" : "bg-gray-200 text-gray-400"}`}
+              >
+                <FiChevronLeft className="text-2xl" />
+              </button>
 
-            <button
-              onClick={() => scroll("right")}
-              className={`p-2 rounded border cursor-pointer ${canScrollRight ? "bg-white text-black" : "bg-gray-200 text-gray-400"}`}
-            >
-              <FiChevronRight className="text-2xl" />
-            </button>
+              <button
+                onClick={() => scroll("right")}
+                className={`p-2 rounded border cursor-pointer ${canScrollRight ? "bg-white text-black" : "bg-gray-200 text-gray-400"}`}
+              >
+                <FiChevronRight className="text-2xl" />
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Scrollable Content */}
-        <div
-          ref={scrollRef}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUpOrLeave}
-          onMouseLeave={handleMouseUpOrLeave}
-          className={`container mx-auto overflow-x-scroll flex space-x-6 relative ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
-        >
-          {
-            newArrivals.map((product) => (
-              <div key={product._id} className="min-w-full sm:min-w-1/2 lg:min-w-[30%] relative">
-                <img
-                  draggable="false"
-                  src={product.images[0]?.url}
-                  alt={product.images[0]?.altText || product.name}
-                  className="w-full h-[500px] object-cover rounded-lg"
-                />
-                <div
-                  className="absolute bottom-0 left-0 right-0 opacity-50 backdrop-blur-md text-white p-2 rounded-b-lg"
-                >
-                  <Link to={`/product/${product._id}`} className="block">
-                    <h4 className="font-medium">{product.name}</h4>
-                    <p className="mt-1">${product.price}</p>
-                  </Link>
+          {/* Scrollable Content */}
+          <div
+            ref={scrollRef}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUpOrLeave}
+            onMouseLeave={handleMouseUpOrLeave}
+            className={`container mx-auto overflow-x-scroll flex space-x-6 relative ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+          >
+            {
+              newArrivals.map((product) => (
+                <div key={product._id} className="min-w-full sm:min-w-1/2 lg:min-w-[30%] relative">
+                  <img
+                    draggable="false"
+                    src={product.images[0]?.url}
+                    alt={product.images[0]?.altText || product.name}
+                    className="w-full h-[500px] object-cover rounded-lg"
+                  />
+                  <div
+                    className="absolute bottom-0 left-0 right-0 opacity-50 backdrop-blur-md text-white p-2 rounded-b-lg"
+                  >
+                    <Link to={`/product/${product._id}`} className="block">
+                      <h4 className="font-medium">{product.name}</h4>
+                      <p className="mt-1">${product.price}</p>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))
-          }
-        </div>
-      </section >
-    </>
-  )
-}
+              ))
+            }
+          </div>
+        </section >
+      </>
+    )
+  }
 
-export default NewArrivals;
+  export default NewArrivals;
