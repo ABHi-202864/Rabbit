@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import featured from "../../assets/featured.webp";
 
 function FeturedCollection() {
   return (
@@ -15,11 +16,17 @@ function FeturedCollection() {
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Apparel made for your everyday life
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 mb-6">
               Discover high-quality, comfortable clothing that effortlessly blends fashion and function. Designed to make you look and feel great every day.
             </p>
+            <Link to="/collections/all" className='bg-black text-white px-6 py-3 rounded-lg text-lg hover:bg-gray-800'>
+              Shop Now
+            </Link>
+          </div>
 
-            <Link to="/collections/all" className='bg-black text-white px-6 py-3 rounded-lg text-lg hover:bg-gray-800'></Link>
+          {/* Right Content */}
+          <div className="lg:w-1/2">
+            <img src={featured} alt="Featured Collection" className='w-full h-full object-cover lg:rounded-tr-3xl lg:rounded-br-3xl' />
           </div>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import Hero from '../components/Layout/Hero';
 import FeturedCollection from '../components/Products/FeturedCollection';
+import FeturedSection from '../components/Products/FeturedSection';
 import GenderCollectionSection from '../components/Products/GenderCollectionSection';
 import NewArrivals from '../components/Products/NewArrivals';
 import ProductDetails from '../components/Products/ProductDetails';
@@ -107,6 +108,7 @@ function Home() {
       </div>
 
       <FeturedCollection />
+      <FeturedSection />
     </>
   )
 }
