@@ -2,7 +2,8 @@ import { useState } from "react"
 import { Link } from "react-router-dom";
 import login from "../assets/login.webp";
 
-function Login() {
+function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,6 +19,17 @@ function Login() {
             <p className="text-center mb-6">
               Enter your username and password to Login.
             </p>
+            <div className="mb-4">
+              <label className="block text-sm font-semibold mb-2">Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-2 border rounded"
+                placeholder="Enter your email address"
+              />
+            </div>
+
             <div className="mb-4">
               <label className="block text-sm font-semibold mb-2">Email</label>
               <input
@@ -65,4 +77,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Register;
