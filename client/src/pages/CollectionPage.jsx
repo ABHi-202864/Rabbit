@@ -15,11 +15,10 @@ function CollectionPage() {
   }
 
   const handleClickOutside = (e) => {
-    // Close sidebar if clicked outside
     if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
       setIsSidebarOpen(false);
     }
-  } // whis i click outside not close fixed this issu chat?
+  }  
 
   useEffect(() => {
     // Add Event listener for clicks
@@ -28,7 +27,7 @@ function CollectionPage() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     }
-  });
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
