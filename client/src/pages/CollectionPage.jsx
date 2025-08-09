@@ -18,7 +18,7 @@ function CollectionPage() {
     if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
       setIsSidebarOpen(false);
     }
-  }  
+  }
 
   useEffect(() => {
     // Add Event listener for clicks
