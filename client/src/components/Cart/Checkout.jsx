@@ -1,0 +1,181 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import PaypalButton from './PaypalButton';
+
+const cart = {
+  products: [
+    {
+      name: "Stylish Jacket",
+      size: "M",
+      color: "Black",
+      price: 120,
+      image: "https://picsum.photos/150?random=1",
+    },
+    {
+      name: "Casual Sneakers",
+      size: "42",
+      color: "White",
+      price: 75,
+      image: "https://picsum.photos/150?random=2",
+    },
+  ],
+  totalPrice: 195,
+};
+
+function Checkout() {
+  const [checkoutId, setCheckoutId] = useState(null);
+  const [shippingAddress, setShippingAddress] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    country: "",
+    phone: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleCreateCheckout = (e) => {
+    e.preventDefault();
+
+    setCheckoutId(123);
+  }
+
+  const handlePaymentSuccess = (details) => {
+    console.log("Payment Successful", details);
+
+    navigate("order-confirmation");
+  }
+
+  return (
+    <>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto py-10 px-6 tracking-tighter">
+        {/* Left Section */}
+        <div className="bg-white rounded-lg p-6">
+          <h2 className="text-2xl uppercase mb-6">Checkout</h2>
+
+          <form onSubmit={handleCreateCheckout}>
+            <h3 className='text-lg mb-4'>Contact Details</h3>
+            <div className="mb-4">
+              <label htmlFor="" className='block text-gray-700'>Email :</label>
+              <input
+                type="email"
+                value="user@gmail.com"
+                className='w-full p-2 border rounded'
+                disabled
+              />
+            </div>
+
+            <h3 className='text-lg mb-4'>Delivery</h3>
+            <div className="mb-4 grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="" className='block text-gray-700'>First Name :</label>
+                <input
+                  onChange={(e) => setShippingAddress({ ...shippingAddress, firstName: e.target.value })}
+                  type="text"
+                  value={shippingAddress.firstName}
+                  className='w-full p-2 border rounded'
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="" className='block text-gray-700'>Last Name :</label>
+                <input
+                  onChange={(e) => setShippingAddress({ ...shippingAddress, lastName: e.target.value })}
+                  type="text"
+                  value={shippingAddress.lastName}
+                  className='w-full p-2 border rounded'
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="" className='block text-gray-700'>Address :</label>
+              <textarea
+                onChange={(e) => setShippingAddress({ ...shippingAddress, address: e.target.value })}
+                type="text"
+                value={shippingAddress.address}
+                className='w-full p-2 border rounded'
+                required
+              >
+              </textarea>
+            </div>
+
+            <div className="mb-4 grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="" className='block text-gray-700'>City :</label>
+                <input
+                  onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })}
+                  type="text"
+                  value={shippingAddress.city}
+                  className='w-full p-2 border rounded'
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="" className='block text-gray-700'>Postal Code :</label>
+                <input
+                  onChange={(e) => setShippingAddress({ ...shippingAddress, postalCode: e.target.value })}
+                  type="text"
+                  value={shippingAddress.postalCode}
+                  className='w-full p-2 border rounded'
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="" className='block text-gray-700'>Country :</label>
+              <input
+                onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })}
+                type="text"
+                value={shippingAddress.country}
+                className='w-full p-2 border rounded'
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="" className='block text-gray-700'>Phone :</label>
+              <input
+                onChange={(e) => setShippingAddress({ ...shippingAddress, phone: e.target.value })}
+                type="text"
+                value={shippingAddress.phone}
+                className='w-full p-2 border rounded'
+                required
+              />
+            </div>
+
+            <div className="mt-6">
+              {!checkoutId ? (
+                <button type='submit' className='w-full bg-black text-white py-3 rounded'>Continue to Payment</button>
+              ) : (
+                <div>
+                  <h3 className="text-lg mb-4">Pay with Payple</h3>
+
+                  {/* Paypal Component */}
+                  <PaypalButton
+                    amount={100}
+                    onSuccess={handlePaymentSuccess}
+                    onError={(error) => alert("Payment failed. Try again.")}
+                  />
+                </div>
+              )}
+            </div>
+          </form>
+        </div >
+
+        {/* Right Section */}
+        <div className="bg-gray-50 p-6 rounded-lg">
+          <h3 className="text-lg mb-4">Order Summery</h3>
+        </div>
+      </div >
+    </>
+  )
+}
+
+export default Checkout
