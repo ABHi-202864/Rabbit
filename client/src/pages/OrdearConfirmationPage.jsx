@@ -24,8 +24,8 @@ const checkout = {
   ],
   shippingAddress: {
     address: "221B Baker Street",
-    city: "London",
-    country: "England"
+    city: "New York",
+    country: "USA"
   }
 }
 
