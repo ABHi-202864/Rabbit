@@ -45,7 +45,7 @@ function Checkout() {
   const handlePaymentSuccess = (details) => {
     console.log("Payment Successful", details);
 
-    navigate("order-confirmation");
+    navigate("/order-confirmation");
   }
 
   return (
@@ -161,7 +161,10 @@ function Checkout() {
                   <PaypalButton
                     amount={100}
                     onSuccess={handlePaymentSuccess}
-                    onError={(error) => alert("Payment failed. Try again.")}
+                    onError={(error) => {
+                      alert("Payment failed. Try again.");
+                      console.log(error);
+                    }}
                   />
                 </div>
               )}
