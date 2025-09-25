@@ -5,7 +5,7 @@ import { FaStore } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
 
-function AdminSidebar() {
+const AdminSidebar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -68,4 +68,4 @@ function AdminSidebar() {
   )
 }
 
-export default AdminSidebar
+export default AdminSidebar;
