@@ -3,7 +3,7 @@ import { FaBars } from "react-icons/fa";
 import AdminSidebar from './AdminSidebar';
 import { Outlet } from 'react-router-dom';
 
-function AdminLayout() {
+const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -44,4 +44,4 @@ function AdminLayout() {
   )
 }
 
-export default AdminLayout
+export default AdminLayout;
