@@ -147,7 +147,7 @@ const EditProductPage = () => {
             </div>
           </div>
 
-          <button type="submit" className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 cursor-pointer transition-colors">Update Product :</button>
+          <button type="submit" className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 cursor-pointer transition-colors">Update Product</button>
         </form>
       </div>
     </>
